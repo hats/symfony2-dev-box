@@ -9,7 +9,8 @@ class php::pear {
     # upgrade PEAR
     exec { 'pear-upgrade':
         command => '/usr/bin/pear upgrade-all',
-        require => Exec['pear-update-channel']
+        require => Exec['pear-update-channel'],
+        timeout => 3600
     }
 
     # install PHPUnit
