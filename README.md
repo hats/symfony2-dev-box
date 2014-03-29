@@ -5,7 +5,7 @@ devbox is a Vagrant development machine provisioned and preconfigured for workin
 
 
 ## Features / Stack
-Ubuntu 12.04 32bit, Nginx, PHP5.5, php-fpm, xdebug, composer, MySQL 5.5, PostgreSQL 9.3, Redis, Beanstalkd, supervisord, Sphinx, ngrok, Node.js, MongoDB
+Ubuntu 12.04 64bit, Nginx, PHP5.5, php-fpm, xdebug, composer, MySQL 5.5, PostgreSQL 9.3, Redis, Beanstalkd, supervisord, Sphinx, ngrok, Node.js (bower), MongoDB
 
 
 
@@ -18,7 +18,7 @@ Ubuntu 12.04 32bit, Nginx, PHP5.5, php-fpm, xdebug, composer, MySQL 5.5, Postgre
 ## Initial Setup
 
 * Install VirtualBox and Vagrant ( >= 1.3.0)
-* Clone this repository `git clone https://github.com/Aboalarm/devbox.git`. 
+* Clone this repository `git clone https://github.com/pou/devbox.git`.
 * Run `vagrant up` inside the newly created directory. (the first time you run Vagrant it will fetch the virtual box image which is ~300mb. So this could take some time)
 * Vagrant will now use Puppet to provision the devbox (this could take a few minutes)
 * Point "devbox" and any other vhosts to `192.168.3.3` in your hosts file of your host OS. e.g. `192.168.3.3 devbox myproject.dev myotherproject.dev [HOSTNAME]` 
@@ -30,6 +30,7 @@ The www folder is automatically synced to the VM (/var/www). This is why we clon
 ## Credentials 
 * SSH User: `vagrant` PW: `vagrant`
 * MySQL User: `root` PW: `root` (access MySQL through SSH)
+* PostgreSQL User: `postgres` PW: empty (access PostgreSQL through SSH)
 
 ## Vagrant Commands
 
