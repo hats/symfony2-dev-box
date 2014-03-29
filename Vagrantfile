@@ -29,6 +29,11 @@ Vagrant::configure("2") do |config|
 
   config.vm.network :private_network, ip: "192.168.3.3"
 
+  config.vm.provision :shell do |shell|
+    shell.inline = "mkdir -p /etc/puppet/modules;
+		    puppet module install willdurand/nodejs"
+  end
+
   config.vm.provision :puppet do |puppet|
      puppet.facter = { "fqdn" => "local.devbox", "hostname" => "devbox" }
      puppet.manifests_path = "manifests"

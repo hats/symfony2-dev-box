@@ -34,7 +34,7 @@ include supervisor
 include sphinx
 include redis
 include git
-include nodejs
+include node-js
 include composer
 include beanstalkd
 include ngrok
