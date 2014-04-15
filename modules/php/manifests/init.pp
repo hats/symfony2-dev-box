@@ -31,6 +31,15 @@ class php {
         group => root,
         source => 'puppet:///modules/php/browscap.ini',
         require => Package['php5-fpm'],
+    }    
+    
+    file { 'xdebug.ini':
+        path => '/etc/php5/mods-available/xdebug.ini',
+        ensure => file,
+        owner => root,
+        group => root,
+        source => 'puppet:///modules/php/xdebug.ini',
+        require => Package['php5-fpm'],
     }
 
     service { 'apache2':
