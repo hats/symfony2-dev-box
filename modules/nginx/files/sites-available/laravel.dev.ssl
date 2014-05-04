@@ -1,7 +1,7 @@
 server {
     listen          443;
     server_name     *.dev;
-    root            /var/www/$host/public;
+    root            /var/www/$host/web;
 
     ssl                         on;
     ssl_certificate             /usr/share/nginx/certs/server.crt;
@@ -12,14 +12,26 @@ server {
     ssl_protocols               SSLv2 SSLv3 TLSv1;
     ssl_ciphers                 HIGH:!aNULL:!MD5;
     
+    error_log /var/log/nginx/symfony2.error.log;
+    access_log /var/log/nginx/symfony2.access.log;
+
+    # strip app.php/ prefix if it is present
+    rewrite ^/app\.php/?(.*)$ /$1 permanent;
+
     location / {
-        index       index.html index.htm index.php;
-        try_files   $uri $uri/ /index.php?$query_string;
+        index app.php;
+        try_files $uri @rewriteapp;
     }
 
-    location ~ \.php$ {
+    location @rewriteapp {
+        rewrite ^(.*)$ /app.php/$1 last;
+    }
+
+    # pass the PHP scripts to FastCGI server from upstream phpfcgi
+    # location ~ \.php$ {
+    location ~ ^/(app|app_dev|config)\.php(/|$) {
         fastcgi_pass    unix:/var/run/php5-fpm.sock;
-        fastcgi_index   index.php;
+        fastcgi_split_path_info ^(.+\.php)(/.*)$;
         fastcgi_param   SCRIPT_FILENAME  $document_root$fastcgi_script_name;
         fastcgi_param   HTTPS on; 
         include         fastcgi_params;

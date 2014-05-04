@@ -23,6 +23,7 @@ class {'php':
 }
 
 include apt_get::update
+include node-js
 include tools
 include git
 include vim
@@ -34,7 +35,6 @@ include supervisor
 include sphinx
 include redis
 include git
-include node-js
 include composer
 include beanstalkd
 include ngrok
