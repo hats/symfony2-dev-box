@@ -7,11 +7,14 @@ server {
     access_log /var/log/nginx/symfony2.access.log;
 
     # strip app.php/ prefix if it is present
-    rewrite ^/app\.php/?(.*)$ /$1 permanent;
+    #rewrite ^/app\.php/?(.*)$ /$1 permanent;
 
     location / {
-        index app.php;
-        try_files $uri @rewriteapp;
+        if (!-e $request_filename){
+                rewrite ^(.*)$ /app_dev.php last;
+        }
+        index app_dev.php;
+        #try_files $uri @rewriteapp;
     }
 
     # location ~ \.php$ {
