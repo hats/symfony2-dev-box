@@ -29,7 +29,8 @@ Vagrant::configure("2") do |config|
   # network interface) by any external networks.
 
   config.vm.network :private_network, ip: "192.168.3.3"
-  # config.vm.network "forwarded_port", guest: 80, host: 8080
+  #config.vm.network "forwarded_port", guest: 80, host: 8080
+  config.vm.network "forwarded_port", guest: 3306, host: 23306
 
   config.vm.provision :shell do |shell|
     shell.inline = "mkdir -p /etc/puppet/modules;
